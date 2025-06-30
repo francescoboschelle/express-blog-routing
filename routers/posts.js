@@ -61,7 +61,13 @@ router.get("/", (req, res) => {
 // show
 router.get("/:id", (req, res) => {
   const id = req.params.id;
-  res.send("Post ID: " + id);
+  const post = posts.find((post) => post.id === parseInt(id));
+
+  if (post) {
+    res.json(post);
+  } else {
+    res.status(404).send("Post non trovato");
+  }
 });
 
 // create
